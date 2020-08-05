@@ -8,8 +8,10 @@
 
 // Create global variables for Base URL and API Key for OpenWeatherMap API
 // api.openweathermap.org/data/2.5/weather?zip={zip code},{country code}&appid={your api key}
-let baseURL = 'https://api.openweathermap.org/data/2.5/weather?zip=';
-let key = '206f2e76d1ea84859a30e0e95949e762';
+//const apiKey = '&appid=ba960daefc10c56dc6f7608b7d568c3e&units=metric';
+const baseURL = 'https://api.openweathermap.org/data/2.5/weather?zip=';
+const key = '206f2e76d1ea84859a30e0e95949e762';
+const unitsMetric =  'metric';
 
 // Create a new date instance dynamically with JS
 let d = new Date();
@@ -47,7 +49,7 @@ function performAction(e){
 // An async function in that uses fetch() to make a GET request to the OpenWeatherMap API.
 const getTemperature = async (baseURL, code, key)=>{
     // const getTemperatureDemo = async (url)=>{
-    const response = await fetch(baseURL + code + ',us' + '&APPID=' + key)
+    const response = await fetch(baseURL + code + ',us' + '&APPID=' + key + '&units='+ unitsMetric)
     console.log(response);
     try {
         const data = await response.json();

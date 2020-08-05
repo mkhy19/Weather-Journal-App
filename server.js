@@ -39,3 +39,27 @@ function listening(){
     console.log("server running");
     console.log(`running on localhost: ${port}`);
 }
+
+// TODO-ROUTES!
+// GET route
+// pass a function in as the second parameter that returns the projectData object
+app.get('/all', sendData);
+
+function sendData (req, res) {
+    res.send(projectData);
+};
+
+// POST route
+// create a POST route that uses the url /addWeatherData and sends the response POST received when used to make a request.
+app.post('/addWeatherData', addNewData)
+
+function addNewData(req, res) {
+    //res.send('POST received')
+
+    projectData.temperature = req.body.temperature;
+    projectData.date = req.body.date;
+    projectData.user_res = req.body.user_res;
+
+    res.end();
+    console.log(projectData)
+}

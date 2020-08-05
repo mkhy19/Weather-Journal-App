@@ -36,6 +36,10 @@ function performAction(e){
         // Add data to POST request
         // The data object should include temperature, date, user response
         postData('http://localhost:8000/addWeatherData', {temperature: data.main.temp, date: newDate, user_res: feelings } )
+        // Another Chain Promise to update the UI dynamically
+        .then(function() {
+            updateUI()
+        })
     })
 }
 
@@ -80,6 +84,24 @@ const postData = async (url = '', data = {}) => {
     }
     catch (error) {
         console.log('Error', error);
+        // appropriately handle the error
+    }
+}
+
+// Update user interface UI dynamically
+// This function should retrieve data from our app, select the necessary elements on the DOM (index.html), and then update their necessary values to reflect the dynamic values for: Temperature, Date, User input
+const updateUI = async () => {
+    const request = await fetch('http://localhost:8000/all');
+    try {
+        const allData = await request.json();
+        console.log('Update user interface UI dynamically');
+
+        document.getElementById('date').innerHTML = allData.date;
+        document.getElementById('temp').innerHTML = allData.temperature;
+        document.getElementById('content').innerHTML = allData.user_res;
+    }
+    catch (error) {
+        console.log('error', error);
         // appropriately handle the error
     }
 }

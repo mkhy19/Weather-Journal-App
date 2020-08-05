@@ -59,7 +59,7 @@ function addNewData(req, res) {
     projectData.temperature = req.body.temperature;
     projectData.date = req.body.date;
     projectData.user_res = req.body.user_res;
-
-    res.end();
+    res.send(projectData);
+    //res.end();
     console.log(projectData)
 }
